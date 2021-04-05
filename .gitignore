@@ -1,0 +1,12 @@
+/node_modules
+package-lock.json
+README.md
+
+#debugging file
+/debug.log
+
+#data files
+
+#reports on local run
+/reports/* 
+
