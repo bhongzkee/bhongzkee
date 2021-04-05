@@ -71,8 +71,8 @@ exports.config = {
         jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
             consolidateAll: false,
             consolidate: true,
-            savePath: 'reports/ui',
-            filePrefix: 'ui',
+            savePath: 'reports/api',
+            // filePrefix: 'ui',
             suppressDisabled: true
         }));
 
