@@ -58,7 +58,7 @@ exports.config = {
 
         // jasmine.getEnv().addReporter(DescribeFailureReporter(jasmine.getEnv()));
         jasmine.getEnv().addReporter(new HtmlReporter({
-            baseDirectory: "reports/ui",
+            baseDirectory: "reports/api",
             jsonsSubfolder: 'jsons',
             screenshotsSubfolder: 'images',
             excludeSkippedSpecs: false,
@@ -72,7 +72,7 @@ exports.config = {
             consolidateAll: false,
             consolidate: true,
             savePath: 'reports/api',
-            // filePrefix: 'ui',
+            // filePrefix: 'API-',
             suppressDisabled: true
         }));
 
