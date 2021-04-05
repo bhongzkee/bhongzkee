@@ -63,7 +63,7 @@ exports.config = {
             screenshotsSubfolder: 'images',
             excludeSkippedSpecs: false,
             takeScreenShotsOnlyForFailedSpecs: true,
-            docTitle: "UI -Test Report",
+            docTitle: "Test Report",
             docName: "report.html",
             preserveDirectory: false
         }).getJasmine2Reporter())
