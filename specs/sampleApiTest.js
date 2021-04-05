@@ -22,10 +22,31 @@ describe("API Endpoints Tests",function(){
     );
   });
 
-  it("User Has Able To Fetch List Of Countries Sorted By Population - First Is AFGHANISTAN", function (done) {
+  it("User Has Able To Fetch List Of Countries Without Authorization", function (done) {
     Request.get({
       "url": baseEndPoint+"?order=asc",
       "headers": headersNoAuth,
+      },
+      function (error, response, body) {
+        if(error) {
+            return console.dir(error);
+        }
+        expect(response.statusCode).toBe(200);
+        if (response.statusCode === 200) {
+          fs.writeFileSync('responseBody.json', body);
+          let bodyInfo = require('../responseBody.json')
+          let firstItem = bodyInfo[0]['name'];
+          expect(firstItem).toBe('AFGHANISTAN');
+        }
+        done();
+      }
+    );
+  });
+
+  it("User Has Able To Fetch List Of Countries With Authorization", function (done) {
+    Request.get({
+      "url": baseEndPoint+"?order=asc",
+      "headers": headersWithAuth,
       },
       function (error, response, body) {
         if(error) {
@@ -67,9 +88,30 @@ describe("API Endpoints Tests",function(){
 
   });
 
-  it("User Has Fetch List Of Countries Sorted By Population After Update - First Is PHILIPPINES", function (done) {
+  it("User Has Fetch List Of Countries Sorted Order-Asc By Population After Update - Last PHILIPPINES", function (done) {
     Request.get({
       "url": baseEndPoint+"?order=asc",
+      "headers": headersWithAuth
+    },
+    function (error, response, body) {
+        if (error) {
+          return console.dir(error);
+        }
+        if (response.statusCode === 200) {
+          fs.writeFileSync('responseBody.json', body);
+          delete require.cache[require.resolve('../responseBody.json')]
+          let bodyInfo = require('../responseBody.json');
+          expect(bodyInfo[bodyInfo.length-1]['name']).toBe('PHILIPPINES');
+        }
+        done();
+      }
+    );
+
+  });
+
+  it("User Has Fetch List Of Countries Sorted Order-Desc By Population After Update - First PHILIPPINES", function (done) {
+    Request.get({
+      "url": baseEndPoint+"?order=desc",
       "headers": headersWithAuth
     },
     function (error, response, body) {
